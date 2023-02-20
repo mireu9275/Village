@@ -24,6 +24,9 @@ object VillageManager {
         villageMap.remove(name)
     }
 
+    fun addVillage(village: Village, player: Player) {
+
+    }
 
 
 }
