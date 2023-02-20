@@ -3,7 +3,6 @@ package managers
 import objects.Village
 import objects.VillagePlayer
 import org.bukkit.entity.Player
-import java.util.*
 import kotlin.collections.HashMap
 
 object VillageManager {
@@ -23,10 +22,4 @@ object VillageManager {
         if(!villageMap.containsKey(name)) return
         villageMap.remove(name)
     }
-
-    fun addVillage(village: Village, player: Player) {
-
-    }
-
-
 }
