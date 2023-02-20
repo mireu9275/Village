@@ -17,6 +17,13 @@ object VillageManager {
         villageMap[name] = village
     }
 
+    fun addPlayer(player: Player, name: String) {
+        if (!villageMap.containsKey(name)) { player.sendMessage("${name}마을은 존재하지 않는 마을입니다!"); return }
+        val village = Village(name)
+        VillagePlayer.getVillage() {}
+    }
+
+
     fun removeVillage(name: String) {
         if(!villageMap.containsKey(name)) return
         villageMap.remove(name)
