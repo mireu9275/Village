@@ -13,7 +13,7 @@ object VillageManager {
     fun createVillage(player: Player, name: String) {
         if(villageMap.containsKey(name)) { player.sendMessage("${name}마을은 이미 존재하는 마을입니다!"); return }
         val village = Village(name)
-        VillagePlayer(player,name).setOwner()
+        VillagePlayer(player,village).setOwner()
         village.addPlayer(player,name)
         villageMap[name] = village
     }
