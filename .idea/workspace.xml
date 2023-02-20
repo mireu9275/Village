@@ -6,7 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="48c17b18-3ea8-4f32-bc85-5fbc7bbd1843" name="변경" comment="init">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/managers/VillageManager.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/managers/VillageManager.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/objects/Village.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/objects/Village.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/objects/VillagePlayer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/objects/VillagePlayer.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,7 +95,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676857084929</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="init">
+      <created>1676857439227</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1676857439227</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

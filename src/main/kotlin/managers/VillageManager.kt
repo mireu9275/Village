@@ -1,7 +1,9 @@
 package managers
 
 import objects.Village
+import java.util.*
+import kotlin.collections.HashMap
 
 object VillageManager {
-    private val villageMap = HashMap<Int, Village>()
+    private val villageMap = HashMap<UUID, Village>()
 }
