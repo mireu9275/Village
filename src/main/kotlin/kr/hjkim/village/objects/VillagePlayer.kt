@@ -10,11 +10,6 @@ class VillagePlayer(
     val player = player
     val village = village
 
-
-    fun getVillage(): String {
-        return village.name
-    }
-
     enum class VillagePlayerRole {
         OWNER,
         MEMBER,
