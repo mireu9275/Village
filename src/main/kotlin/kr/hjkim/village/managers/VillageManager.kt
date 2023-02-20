@@ -1,7 +1,7 @@
-package managers
+package kr.hjkim.village.managers
 
-import objects.Village
-import objects.VillagePlayer
+import kr.hjkim.village.objects.Village
+import kr.hjkim.village.objects.VillagePlayer
 import org.bukkit.entity.Player
 import kotlin.collections.HashMap
 

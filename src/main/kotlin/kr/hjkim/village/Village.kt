@@ -1,3 +1,5 @@
+package kr.hjkim.village
+
 import org.bukkit.plugin.java.JavaPlugin
 
 class Village: JavaPlugin() {

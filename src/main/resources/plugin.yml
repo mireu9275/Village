@@ -1,0 +1,8 @@
+name: Village
+main: kr.hjkim.village.Village
+version: 1.0
+api-version: 1.19
+commands:
+  village:
+    description: 마을 플러그인 명령어
+    aliases: [마을]

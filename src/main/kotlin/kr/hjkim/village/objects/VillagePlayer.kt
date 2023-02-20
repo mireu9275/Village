@@ -1,4 +1,4 @@
-package objects
+package kr.hjkim.village.objects
 
 import org.bukkit.entity.Player
 
