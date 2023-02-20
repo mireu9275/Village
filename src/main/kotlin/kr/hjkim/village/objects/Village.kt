@@ -11,7 +11,7 @@ class Village(name: String) {
     private var maxPlayer: Int = 10
 
     fun getMember(uuid: UUID): VillagePlayer? = memberMap[uuid]
-    fun addMember(player: Player, villagePlayerRole: VillagePlayer.VillagePlayerRole) {
+    fun addMember(player: Player, villagePlayerRole: VillagePlayer.VillagePlayerRole): VillagePlayer {
         memberMap[player.uniqueId] = VillagePlayer(player, villagePlayerRole,this)
     }
     fun removeMember(uuid: UUID) = memberMap.remove(uuid)
