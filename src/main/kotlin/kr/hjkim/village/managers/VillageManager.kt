@@ -29,7 +29,7 @@ object VillageManager {
         playerMap[player] = villagePlayer
     }
 
-    fun getPlayer(player: Player) = playerMap[player]
+    private fun getPlayer(player: Player) = playerMap[player]
 
     fun removeVillage(name: String) {
         if(!villageMap.containsKey(name)) return
