@@ -5,7 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="48c17b18-3ea8-4f32-bc85-5fbc7bbd1843" name="변경" comment="&#10;update">
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/enums/VillagerRole.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/managers/VillagerManager.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/objects/Villager.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/managers/VillageManager.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/managers/VillageManager.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/objects/Village.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/objects/Village.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/objects/VillagePlayer.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,8 +45,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Kotlin Object" />
         <option value="Kotlin Class" />
+        <option value="Kotlin Object" />
       </list>
     </option>
   </component>
@@ -216,7 +224,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676893141970</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="&#10;update">
+      <created>1676893167011</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1676893167011</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

@@ -8,3 +8,9 @@ commands:
   village:
     description: 마을 플러그인 명령어
     aliases: [마을]
+
+villageA:
+  villagers:
+    - 123123-123-123-123-123
+    - 213-21-312-321-312-312-
+    - 123-21312-312-3-123-1-3

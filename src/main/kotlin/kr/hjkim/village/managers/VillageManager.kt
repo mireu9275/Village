@@ -1,31 +1,42 @@
 package kr.hjkim.village.managers
 
+import kr.hjkim.village.enums.VillagerRole
+import kr.hjkim.village.main
 import kr.hjkim.village.objects.Village
-import kr.hjkim.village.objects.VillagePlayer
+import kr.hjkim.village.objects.Villager
+import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.entity.Player
+import java.io.File
+import java.util.UUID
 import kotlin.collections.HashMap
 
 object VillageManager {
     private val villageMap = HashMap<String, Village>()
-    private val playerMap = HashMap<Player, VillagePlayer>()
+    private val villagerMap = HashMap<UUID, Villager>()
 
     fun getVillage(name: String) = villageMap[name]
+
+    fun getVillager(uuid: UUID): Villager? = villagerMap[uuid]
+
+    fun getOfflineVillager(uuid: UUID): Villager? {
+        val file = File(main.dataFolder,"$uuid.yml")
+        val config = YamlConfiguration.loadConfiguration(file)
+        return Villager(null,uuid,config.getString("")!!,VillagerRole.MEMBER)
+    }
+
+    fun createVillager(player: Player, name: String) {
+        if(villageMap.containsKey(name)) { player.sendMessage("${name}마을은 이미 존재하는 마을입니다!"); return }
+        val village = Village(name)
+        val owner = Villager(player,player.uniqueId,name,VillagerRole.OWNER)
+
+    }
 
     fun createVillage(player: Player, name: String) {
         if(villageMap.containsKey(name)) { player.sendMessage("${name}마을은 이미 존재하는 마을입니다!"); return }
         val village = Village(name)
-        village.addMember(player,VillagePlayer.VillagePlayerRole.OWNER)
-        val villagePlayer: VillagePlayer = village.getMember(player.uniqueId) ?: return
+        village.addMember(player,VillagerRole.OWNER)
+        val villagePlayer: Villager = village.getVillager(player.uniqueId) ?: return
         villageMap[name] = village
-        playerMap[player] = villagePlayer
-    }
-
-    fun addPlayer(player: Player, name: String) {
-        val village = villageMap[name]
-        if (village == null) { player.sendMessage("${name}마을은 존재하지 않는 마을입니다!"); return }
-        val villagePlayerCheck = getPlayer(player)
-        if (villagePlayerCheck != null) { player.sendMessage("${player}님은 이미 다른 마을에 속해있습니다."); return }
-        val villagePlayer: VillagePlayer = village.getMember(player.uniqueId) ?: return
         playerMap[player] = villagePlayer
     }
 
@@ -35,4 +46,5 @@ object VillageManager {
         if(!villageMap.containsKey(name)) return
         villageMap.remove(name)
     }
+
 }
