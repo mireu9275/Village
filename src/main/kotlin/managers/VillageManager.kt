@@ -1,5 +1,7 @@
 package managers
 
-object VillageManager {
+import objects.Village
 
+object VillageManager {
+    private val villageMap = HashMap<Int, Village>()
 }
