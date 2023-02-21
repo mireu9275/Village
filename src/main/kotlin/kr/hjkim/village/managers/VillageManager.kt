@@ -15,17 +15,10 @@ object VillageManager {
 
     fun getVillage(name: String) = villageMap[name]
 
-    fun getOfflineVillager(uuid: UUID): Villager? {
-        val file: File = File(main.dataFolder,"$uuid.yml")
-        val config = YamlConfiguration.loadConfiguration(file)
-        return Villager(null,uuid,config.getString("")!!,VillagerRole.MEMBER)
-    }
-
     fun createVillage(player: Player, name: String) {
         if(villageMap.containsKey(name)) { player.sendMessage("${name}마을은 이미 존재하는 마을입니다!"); return }
         val village = Village(name)
         VillagerManager.createVillager(player, name, VillagerRole.OWNER)
-
     }
 
     fun removeVillage(name: String) {

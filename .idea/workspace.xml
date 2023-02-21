@@ -5,8 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="48c17b18-3ea8-4f32-bc85-5fbc7bbd1843" name="변경" comment="&#10;update">
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/listeners/VillageListener.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/managers/SQLManager.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/Global.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/Global.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/Village.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/Village.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/commands/VillageCommands.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/commands/VillageCommands.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/managers/VillageManager.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/managers/VillageManager.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/managers/VillagerManager.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/managers/VillagerManager.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,8 +48,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Kotlin Class" />
         <option value="Kotlin Object" />
+        <option value="Kotlin Class" />
       </list>
     </option>
   </component>
@@ -78,21 +85,6 @@
       <recent name="kr.hjkim.village" />
       <recent name="kr.hjkim.village.commands.listeners.managers" />
     </key>
-  </component>
-  <component name="RunManager">
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="Village" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="Village" />
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -250,7 +242,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676956154077</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="&#10;update">
+      <created>1676956857849</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1676956857849</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

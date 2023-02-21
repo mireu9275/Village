@@ -1,8 +1,11 @@
 package kr.hjkim.village.managers
 
 import kr.hjkim.village.enums.VillagerRole
+import kr.hjkim.village.main
 import kr.hjkim.village.objects.Villager
+import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.entity.Player
+import java.io.File
 import java.util.UUID
 
 object VillagerManager {
@@ -10,9 +13,15 @@ object VillagerManager {
     private val villagerMap = HashMap<UUID,Villager>()
 
     fun getVillager(uuid: UUID): Villager? = villagerMap[uuid]
+    fun getOfflineVillager(uuid: UUID): Villager? {
+        val file: File = File(main.dataFolder,"$uuid.yml")
+        val config = YamlConfiguration.loadConfiguration(file)
+        return Villager(null,uuid,config.getString("")!!,VillagerRole.MEMBER)
+    }
 
     fun createVillager(player: Player, name: String, villagerRole: VillagerRole) {
         val uuid = player.uniqueId
+        if (getVillager(uuid) != null) return
         villagerMap[uuid] = Villager(player, uuid, name, villagerRole)
     }
 
