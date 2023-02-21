@@ -30,7 +30,7 @@ class Villager(
     }
 
     fun save() {
-        val file = File(main.dataFolder,"$uuid.yml")
+        val file: File = File(main.dataFolder,"$uuid.yml")
         val config = YamlConfiguration.loadConfiguration(file)
         config.save(file)
     }

@@ -16,15 +16,6 @@ class Village(val name: String) {
         villagers.add(uuid)
         Villager(null,uuid,name,role).save()
     }
-
-    fun test(player: Player) {
-        val villager = Villager(player,player.uniqueId,name,VillagerRole.MEMBER)
-        addVillager(villager,VillagerRole.MEMBER)
-    }
-
-    fun addMember(player: Player, villagerRole: VillagerRole) {
-        villagerMap[player.uniqueId] = VillagePlayer(player, villagerRole,this)
-    }
-    fun removeMember(uuid: UUID) = villagerMap.remove(uuid)
+    fun removeVillager(uuid: UUID) = villagers.remove(uuid)
 
 }

@@ -11,6 +11,11 @@ object VillagerManager {
 
     fun getVillager(uuid: UUID): Villager? = villagerMap[uuid]
 
+    fun createVillager(player: Player, name: String, villagerRole: VillagerRole) {
+        val uuid = player.uniqueId
+        villagerMap[uuid] = Villager(player, uuid, name, villagerRole)
+    }
+
     fun load(player: Player) {
         val uuid = player.uniqueId
         val villageName = "test"
