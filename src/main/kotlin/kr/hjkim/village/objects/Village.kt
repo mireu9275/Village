@@ -1,7 +1,6 @@
 package kr.hjkim.village.objects
 
 import kr.hjkim.village.enums.VillagerRole
-import org.bukkit.entity.Player
 import java.util.*
 
 class Village(val name: String) {
