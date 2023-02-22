@@ -15,7 +15,13 @@ class VillageListener: Listener {
         val block = event.blockPlaced
 
         if (block.type != Material.STONE) return
-        val blockItem = ItemStack(block.type)
 
+        val lore = ItemStack(block.type).itemMeta.lore ?: return
+
+        if (lore.contains("마을 생성 블록")) {
+            val villager = VillagerManager.getVillager(uuid)
+            if (villager == null) { player.sendMessage("당신은 아직 마을에 속해있지 않습니다."); return }
+            player.sendMessage("마을 생성 블록을 설치하였습니다.")
+        }
     }
 }
