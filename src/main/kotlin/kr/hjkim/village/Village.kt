@@ -10,8 +10,6 @@ class Village: KimPlugin() {
     override fun onEnable() {
         DataBaseManager.registerSQL()
 
-
-
         registerEvents(
             VillageListener()
         )

@@ -17,4 +17,6 @@ class Village(val name: String) {
     }
     fun removeVillager(uuid: UUID) = villagers.remove(uuid)
 
+    fun save() {}
+
 }

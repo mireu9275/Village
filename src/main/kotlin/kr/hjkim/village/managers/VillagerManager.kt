@@ -12,17 +12,29 @@ object VillagerManager {
 
     private val villagerMap = HashMap<UUID,Villager>()
 
+    fun containsVillager(uuid: UUID): Boolean = villagerMap.containsKey(uuid)
+
     fun getVillager(uuid: UUID): Villager? = villagerMap[uuid]
+
     fun getOfflineVillager(uuid: UUID): Villager? {
-        val file: File = File(main.dataFolder,"$uuid.yml")
+        val file = File(main.dataFolder,"$uuid.yml")
+        if(!file.exists()) return null
         val config = YamlConfiguration.loadConfiguration(file)
         return Villager(null,uuid,config.getString("")!!,VillagerRole.MEMBER)
+    }
+
+    fun createVillager(uuid: UUID, name: String, role: VillagerRole) {
+        if(getVillager(uuid) != null) return
+        val villager = Villager(null, uuid, name, role)
+        villager.save()
     }
 
     fun createVillager(player: Player, name: String, villagerRole: VillagerRole) {
         val uuid = player.uniqueId
         if (getVillager(uuid) != null) return
-        villagerMap[uuid] = Villager(player, uuid, name, villagerRole)
+        val villager = Villager(player, uuid, name, villagerRole)
+        villager.save()
+        villagerMap[uuid] = villager
     }
 
     fun load(player: Player) {
