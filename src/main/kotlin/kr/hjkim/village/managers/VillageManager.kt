@@ -44,5 +44,4 @@ object VillageManager {
         if(!villageMap.containsKey(name)) return
         villageMap.remove(name)
     }
-
 }
