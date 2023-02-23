@@ -8,6 +8,7 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.BlockPlaceEvent
 import org.bukkit.event.player.PlayerJoinEvent
+import org.bukkit.event.player.PlayerQuitEvent
 import java.io.File
 
 class VillageListener: Listener {
@@ -34,6 +35,18 @@ class VillageListener: Listener {
     fun onPlayerJoin(event: PlayerJoinEvent) {
         val player = event.player
         val uuid = player.uniqueId
+    }
+
+    /**
+     * 마을에 등록돼 있는 플레이어가 서버에서 나갈 경우
+     * @param event PlayerQuitEvent
+     */
+    @EventHandler
+    fun onPlayerQuit(event: PlayerQuitEvent) {
+        val player = event.player
+        val uuid = player.uniqueId
+        val villager = VillagerManager.getVillager(uuid) ?: return
+        villager.quit()
     }
 
 }

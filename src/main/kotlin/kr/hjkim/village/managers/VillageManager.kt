@@ -50,10 +50,12 @@ object VillageManager {
      * @throws VillageCreateException 마을이 이미 생성 되어있는 경우, 혹은 [uuid] 의 유저가 마을을 보유중인 경우에 발생합니다.
      */
     fun createVillage(player: Player, name: String) {
-        if(containsVillage(name)) throw VillageCreateException("$name 마을은 이미 존재합니다.")
+        if(containsVillage(name)) throw VillageCreateException("\"$name\" 마을은 이미 존재합니다.")
         if(VillagerManager.containsVillager(player.uniqueId)) throw VillageCreateException("이미 마을을 보유중입니다.")
         VillagerManager.createVillager(player, name, VillagerRole.OWNER)
         val village = Village(name)
+        println(village.name)
+        FileManager.createVillageFile(name)
         village.save()
         villageMap[name] = village
     }

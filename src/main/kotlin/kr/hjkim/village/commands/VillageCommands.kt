@@ -3,6 +3,8 @@ package kr.hjkim.village.commands
 import kr.hjkim.village.exceptions.VillageCreateException
 import kr.hjkim.village.managers.VillageBlockManager
 import kr.hjkim.village.managers.VillageManager
+import kr.hjkim.village.managers.VillagerManager
+import org.bukkit.Bukkit
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
@@ -13,8 +15,9 @@ class VillageCommands: CommandExecutor {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if(args.isEmpty()) { usage(sender); return true }
         when(args[0]) {
-            "생성" -> createVillage(sender,args)
+            "생성","create" -> createVillage(sender,args)
             "초대" -> {}
+            "test" -> getVillager(sender,args)
         }
         return true
     }
@@ -51,8 +54,26 @@ class VillageCommands: CommandExecutor {
     private fun createVillage(sender: CommandSender, args: Array<out String>) {
         if(sender !is Player) { sender.sendMessage("플레이어만 입력 가능한 명령어입니다."); return }
         if(args.size != 2) { sender.sendMessage("/마을 생성 [마을명] : 마을을 생성합니다."); return }
-        try { VillageManager.createVillage(sender,args[1]) }
+        try {
+            VillageManager.createVillage(sender,args[1])
+            sender.sendMessage("성공적으로: \"${args[1]}\" 마을을 생성하였습니다.")
+        }
         catch (e: VillageCreateException) { sender.sendMessage("마을 생성에 실패하였습니다. ( ${e.message} )") }
+
+    }
+
+    /**
+     * 테스트용
+     * @param sender CommandSender
+     * @param args Array<out String>
+     */
+    private fun getVillager(sender:CommandSender, args: Array<out String>) {
+        if (sender !is Player) { sender.sendMessage("플레이어만 입력 가능한 명령어입니다."); return }
+        val uuid = sender.uniqueId
+        val villager = VillagerManager.getVillager(uuid) ?: return
+        val player = Bukkit.getPlayer(uuid) ?: return
+        val playerName = player.name
+        sender.sendMessage(playerName)
     }
 
 }

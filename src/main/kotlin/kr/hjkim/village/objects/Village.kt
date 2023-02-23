@@ -1,6 +1,8 @@
 package kr.hjkim.village.objects
 
 import kr.hjkim.village.enums.VillagerRole
+import kr.hjkim.village.exceptions.FileLoadException
+import kr.hjkim.village.managers.FileManager
 import java.util.*
 
 class Village(val name: String) {
@@ -23,7 +25,6 @@ class Village(val name: String) {
      */
     fun addVillager(uuid: UUID, role: VillagerRole) {
         villagers.add(uuid)
-        Villager(null,uuid,name,role).save()
     }
 
     /**
@@ -33,6 +34,17 @@ class Village(val name: String) {
      */
     fun removeVillager(uuid: UUID) = villagers.remove(uuid)
 
-    fun save() {}
+    fun save() {
+        try {
+            val village = FileManager.loadVillageFile(name)
+            village.apply {
+                set("name", name.toString())
+                set("villagers", villagers.toList())
+            }
+            FileManager.saveVillageFile(this.name,village)
+        }
+        catch (e: FileLoadException) { println("파일 읽기 오류 ( ${e.message} )") }
+
+    }
 
 }

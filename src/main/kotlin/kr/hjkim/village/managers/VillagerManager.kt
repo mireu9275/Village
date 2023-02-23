@@ -48,6 +48,7 @@ object VillagerManager {
         val uuid = player.uniqueId
         if (getVillager(uuid) != null) return
         val villager = Villager(player, uuid, name, role)
+        FileManager.createVillagerFile(uuid)
         villager.save()
         villagerMap[uuid] = villager
     }

@@ -2,12 +2,8 @@ package kr.hjkim.village.objects
 
 import kr.hjkim.village.enums.VillagerRole
 import kr.hjkim.village.exceptions.FileLoadException
-import kr.hjkim.village.main
-import kr.hjkim.village.managers.ConfigManager
-import kr.hjkim.village.managers.VillageManager
-import org.bukkit.configuration.file.YamlConfiguration
+import kr.hjkim.village.managers.FileManager
 import org.bukkit.entity.Player
-import java.io.File
 import java.util.UUID
 
 class Villager(
@@ -37,12 +33,12 @@ class Villager(
      */
     fun save() {
         try {
-            ConfigManager.loadVillagerFile(uuid).apply {
-                set("uuid", uuid)
+            val config = FileManager.loadVillagerFile(uuid).apply {
+                set("uuid", uuid.toString())
                 set("village", villageName)
-                set("role", villagerRole)
+                set("role", villagerRole.toString())
             }
-            ConfigManager.saveVillagerFile(uuid)
+            FileManager.saveVillagerFile(uuid, config)
         }
         catch (e: FileLoadException) { println("파일 읽기 오류 ( ${e.message} )") }
     }
