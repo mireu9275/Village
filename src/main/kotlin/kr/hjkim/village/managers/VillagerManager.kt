@@ -12,10 +12,25 @@ object VillagerManager {
 
     private val villagerMap = HashMap<UUID,Villager>()
 
+    /**
+     * 마을 등록 유무를 확인합니다.
+     * @param uuid UUID
+     * @return Boolean
+     */
     fun containsVillager(uuid: UUID): Boolean = villagerMap.containsKey(uuid)
 
+    /**
+     * 마을에 등록된 유저를 가져옵니다.
+     * @param uuid UUID
+     * @return Villager?
+     */
     fun getVillager(uuid: UUID): Villager? = villagerMap[uuid]
 
+    /**
+     * 마을에 등록된 오프라인 유저를 가져옵니다.
+     * @param uuid UUID
+     * @return Villager?
+     */
     fun getOfflineVillager(uuid: UUID): Villager? {
         val file = File(main.dataFolder,"$uuid.yml")
         if(!file.exists()) return null
@@ -23,19 +38,32 @@ object VillagerManager {
         return Villager(null,uuid,config.getString("")!!,VillagerRole.MEMBER)
     }
 
+    /**
+     * 유저를 등록합니다.
+     * @param player Player
+     * @param name String
+     * @param role VillagerRole
+     */
+    fun createVillager(player: Player, name: String, role: VillagerRole) {
+        val uuid = player.uniqueId
+        if (getVillager(uuid) != null) return
+        val villager = Villager(player, uuid, name, role)
+        villager.save()
+        villagerMap[uuid] = villager
+    }
+
+    /**
+     * 오프라인 유저를 등록합니다.
+     * @param uuid UUID
+     * @param name String
+     * @param role VillagerRole
+     */
     fun createVillager(uuid: UUID, name: String, role: VillagerRole) {
         if(getVillager(uuid) != null) return
         val villager = Villager(null, uuid, name, role)
         villager.save()
     }
 
-    fun createVillager(player: Player, name: String, villagerRole: VillagerRole) {
-        val uuid = player.uniqueId
-        if (getVillager(uuid) != null) return
-        val villager = Villager(player, uuid, name, villagerRole)
-        villager.save()
-        villagerMap[uuid] = villager
-    }
 
     fun load(player: Player) {
         val uuid = player.uniqueId

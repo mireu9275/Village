@@ -11,34 +11,10 @@ import org.bukkit.entity.Player
 class VillageCommands: CommandExecutor {
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
-        if(sender !is Player) { sender.sendMessage("플레이어만 입력 가능한 명령어입니다."); return true }
         if(args.isEmpty()) { usage(sender); return true }
         when(args[0]) {
             "생성" -> createVillage(sender,args)
             "초대" -> {}
-        }
-
-        if (sender.isOp) {
-            when(args.size) {
-
-            }
-            if (args.size == 1) {
-                when(args[0]) {
-                    "test1" -> {
-                        sender.inventory.addItem(VillageBlockManager.getVillageBlock())
-                    }
-                }
-            } else if (args.size == 2) {
-                when(args[0]) {
-                    "test2" -> TODO()
-                }
-            }
-        } else {
-            if (args.size == 1) {
-                when (args[0]) {
-                    "test1" -> TODO()
-                }
-            }
         }
         return true
     }
@@ -67,6 +43,11 @@ class VillageCommands: CommandExecutor {
         }
     }
 
+    /**
+     * 마을을 생성합니다.
+     * @param sender CommandSender
+     * @param args Array<out String>
+     */
     private fun createVillage(sender: CommandSender, args: Array<out String>) {
         if(sender !is Player) { sender.sendMessage("플레이어만 입력 가능한 명령어입니다."); return }
         if(args.size != 2) { sender.sendMessage("/마을 생성 [마을명] : 마을을 생성합니다."); return }

@@ -9,6 +9,10 @@ import org.bukkit.inventory.ItemStack
 
 object VillageBlockManager {
 
+    /**
+     * 마을생성블럭을 생성합니다.
+     * @return ItemStack
+     */
     fun getVillageBlock(): ItemStack {
         return ItemStackBuilder.build(Material.STONE) { meta ->
             meta.editCustomNBT { it.setInt("village_block",1) }
@@ -16,6 +20,11 @@ object VillageBlockManager {
         }
     }
 
+    /**
+     * 해당 블럭이 마을생성블럭인지 확인합니다.
+     * @param item ItemStack
+     * @return Boolean
+     */
     fun isVillageBlock(item: ItemStack): Boolean = item.hasNBT("village_block")
 
 }
