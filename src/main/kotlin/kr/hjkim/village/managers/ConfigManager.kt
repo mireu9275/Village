@@ -48,4 +48,14 @@ object ConfigManager {
         return YamlConfiguration.loadConfiguration(configFile)
     }
 
+    /**
+     * 플레이어의 정보를 UUID 파일에 저장합니다.
+     * @param uuid UUID
+     */
+    fun saveVillagerFile(uuid: UUID) {
+        val uuidPath = "uuids/$uuid.yml"
+        val uuidFile = File(main.dataFolder, uuidPath) ?: throw FileLoadException("$uuid.yml 파일이 존재하지 않습니다.")
+        YamlConfiguration.loadConfiguration(uuidFile).save(uuidFile)
+    }
+
 }
