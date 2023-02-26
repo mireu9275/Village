@@ -1,9 +1,10 @@
 package kr.hjkim.village.objects
 
 import kr.hjkim.village.enums.VillagerRole
-import kr.hjkim.village.exceptions.FileLoadException
 import kr.hjkim.village.managers.FileManager
+import kr.hjkim.village.managers.VillageManager
 import org.bukkit.entity.Player
+import java.io.IOException
 import java.util.UUID
 
 class Villager(
@@ -19,6 +20,8 @@ class Villager(
     var player: Player? = player
         private set
 
+    fun getVillage(): Village = VillageManager.getVillage(villageName)!!
+
     fun join(player: Player) {
         this.player = player
     }
@@ -32,15 +35,8 @@ class Villager(
      * $uuid.yml 파일에 현재 가지고 있는 정보를 저장합니다.
      */
     fun save() {
-        try {
-            val config = FileManager.loadVillagerFile(uuid).apply {
-                set("uuid", uuid.toString())
-                set("village", villageName)
-                set("role", villagerRole.toString())
-            }
-            FileManager.saveVillagerFile(uuid, config)
-        }
-        catch (e: FileLoadException) { println("파일 읽기 오류 ( ${e.message} )") }
+        try { FileManager.saveVillagerFile(this) }
+        catch (e: Exception) { println("파일 읽기 오류 ( ${e.message} )") }
     }
 
 }

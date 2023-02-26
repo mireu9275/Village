@@ -2,6 +2,7 @@ package kr.hjkim.village.managers
 
 import kr.hjkim.village.enums.VillagerRole
 import kr.hjkim.village.main
+import kr.hjkim.village.objects.Village
 import kr.hjkim.village.objects.Villager
 import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.entity.Player
@@ -31,30 +32,29 @@ object VillagerManager {
      * @param uuid UUID
      * @return Villager?
      */
-    fun getOfflineVillager(uuid: UUID): Villager? {
-        val file = File(main.dataFolder,"$uuid.yml")
-        if(!file.exists()) return null
-        val config = YamlConfiguration.loadConfiguration(file)
+    fun getOfflineVillager(uuid: UUID): Villager {
+        val config = FileManager.loadVillagerFile(uuid)
         return Villager(null,uuid,config.getString("")!!,VillagerRole.MEMBER)
     }
 
     /**
-     * 유저를 등록합니다.
+     * 유저를 생성합니다.
      * @param player Player
      * @param name String
      * @param role VillagerRole
      */
-    fun createVillager(player: Player, name: String, role: VillagerRole) {
+    fun createVillager(player: Player, name: String, role: VillagerRole): Villager? {
         val uuid = player.uniqueId
-        if (getVillager(uuid) != null) return
         val villager = Villager(player, uuid, name, role)
-        FileManager.createVillagerFile(uuid)
+        val village = VillageManager.getVillage(name) ?: return null
+        village.addVillager(uuid)
         villager.save()
         villagerMap[uuid] = villager
+        return villager
     }
 
     /**
-     * 오프라인 유저를 등록합니다.
+     * 오프라인 유저를 생성합니다.
      * @param uuid UUID
      * @param name String
      * @param role VillagerRole
@@ -65,14 +65,12 @@ object VillagerManager {
         villager.save()
     }
 
-
-    fun load(player: Player) {
-        val uuid = player.uniqueId
-        val villageName = "test"
-        val village = VillageManager.getVillage(villageName)
-        if(village == null) { player.sendMessage("${villageName}마을은 존재하지 않는 마을입니다!"); return }
-        if(!village.isVillager(uuid)) { player.sendMessage("${player}님은 이미 다른 마을에 속해있습니다."); return }
-        villagerMap[uuid] = Villager(player,uuid,"",VillagerRole.MEMBER)
+    /**
+     * 유저를 villagerMap에 등록합니다.
+     * @param uuid UUID
+     * @param villager Villager
+     */
+    fun registerVillager(uuid: UUID, villager: Villager) {
+        villagerMap[uuid] = villager
     }
-
 }

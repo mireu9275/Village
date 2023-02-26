@@ -1,15 +1,14 @@
 package kr.hjkim.village.listeners
 
-import kr.hjkim.village.main
+import kr.hjkim.village.managers.AreaManager
 import kr.hjkim.village.managers.VillageBlockManager
 import kr.hjkim.village.managers.VillagerManager
-import org.bukkit.Material
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.BlockPlaceEvent
 import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.event.player.PlayerQuitEvent
-import java.io.File
+import org.bukkit.event.world.ChunkLoadEvent
 
 class VillageListener: Listener {
 
@@ -21,14 +20,40 @@ class VillageListener: Listener {
     fun onBlockPlace(event: BlockPlaceEvent) {
         val player = event.player
         val uuid = player.uniqueId
-        val block = event.blockPlaced
+        val block = event.block
 
-        if (block.type != Material.STONE) return
-        if (!VillageBlockManager.isVillageBlock(event.itemInHand)) return
+        val chunk = block.world.getChunkAt(block)
+        val villageName = AreaManager.getCurrentVillageName(chunk.chunkKey)
+        if(villageName == null) {
+            if (!VillageBlockManager.isVillageBlock(event.itemInHand)) return
+            val villager = VillagerManager.getVillager(uuid) ?: return
+            event.isCancelled = true
+            val village = villager.getVillage()
+            if(village.addArea(chunk.chunkKey)) {
+                village.save()
+                player.sendMessage("추가되었습니다.")
+            } else {
+                player.sendMessage("더 이상 확장할 수 없습니다.")
+            }
+            return
+        } else {
+            if (VillageBlockManager.isVillageBlock(event.itemInHand)) {
+                event.isCancelled = true
+                player.sendMessage("이미 등록 된 땅입니다.")
+                return
+            }
+            val villager = VillagerManager.getVillager(uuid)
+            if(villager?.villageName != villageName) {
+                event.isCancelled = true
+                player.sendMessage("권한이 없습니다.")
+                return
+            }
+        }
+    }
 
-        val villager = VillagerManager.getVillager(uuid)
-        if (villager == null) { player.sendMessage("당신은 아직 마을에 속해있지 않습니다."); return }
-        player.sendMessage("마을 생성 블록을 설치하였습니다.")
+    @EventHandler
+    fun onChunkLoad(event: ChunkLoadEvent) {
+        event.chunk.chunkKey
     }
 
     @EventHandler

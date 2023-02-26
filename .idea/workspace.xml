@@ -5,17 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="48c17b18-3ea8-4f32-bc85-5fbc7bbd1843" name="변경" comment="&#10;update">
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/exceptions/FileLoadException.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/managers/AreaManager.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/objects/VillageOwnerGUI.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/Village.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/Village.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/commands/VillageCommands.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/commands/VillageCommands.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/exceptions/ConfigFileLoadException.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/exceptions/FileLoadException.kt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/listeners/VillageListener.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/listeners/VillageListener.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/managers/ConfigManager.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/managers/FileManager.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/managers/FileManager.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/managers/FileManager.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/managers/VillageManager.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/managers/VillageManager.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/managers/VillagerManager.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/managers/VillagerManager.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/objects/Village.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/objects/Village.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/objects/Villager.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/objects/Villager.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/1232123-123--213-123-123.yml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -332,7 +334,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677128642284</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="&#10;update">
+      <created>1677161224725</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1677161224725</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

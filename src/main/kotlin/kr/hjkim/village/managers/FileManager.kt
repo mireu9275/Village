@@ -1,116 +1,111 @@
 package kr.hjkim.village.managers
 
-import kr.hjkim.village.exceptions.FileLoadException
 import kr.hjkim.village.main
+import kr.hjkim.village.objects.Village
+import kr.hjkim.village.objects.Villager
 import org.bukkit.configuration.file.YamlConfiguration
-import org.yaml.snakeyaml.Yaml
+import org.bukkit.inventory.ItemStack
 import java.io.File
 import java.util.UUID
 
 object FileManager {
+    private val villageFolder: File = File("${main.dataFolder}\\villages")
+    private val villagerFolder: File = File("${main.dataFolder}\\villagers")
 
     /**
      * Village 폴더내에 config.yml 파일을 생성합니다.
      */
     fun createConfigFile() {
-        val configFile = File(main.dataFolder,"config.yml")
-        if (!configFile.exists()) main.saveDefaultConfig()
+        val file = File(main.dataFolder,"config.yml")
+        if (!file.exists()) main.saveDefaultConfig()
     }
 
-    /**
-     * uuids 폴더내에 플레이어의 UUID 파일을 생성합니다.
-     * @param uuid UUID
-     */
-    fun createVillagerFile(uuid: UUID) {
-        val uuidPath = "uuids/$uuid.yml"
-        val uuidFile = File(main.dataFolder,uuidPath)
-        uuidFile.apply {
-            if (!exists()) {
-                parentFile.mkdirs()
-                createNewFile()
-            }
+    fun getAllVillage(): HashSet<String>? {
+        val villages = HashSet<String>()
+        val villageFiles = villageFolder.listFiles { file -> file.extension == "yml" } ?: return null
+        for (file in villageFiles)  {
+            val config = YamlConfiguration.loadConfiguration(file)
+            val name = config.getString("name") ?: continue
+            villages.add(name)
         }
-    }
-
-    /**
-     * Village 폴더내에 village.yml 파일을 생성합니다.
-     * @param name String
-     */
-    fun createVillageFile(name: String) {
-        val villagePath = "villages/$name.yml"
-        val villageFile = File(main.dataFolder, villagePath)
-        villageFile.apply {
-            if (exists()) {
-                parentFile.mkdirs()
-                createNewFile()
-            }
-        }
+        return villages
     }
 
     /**
      * Config 파일을 불러옵니다.
      * @return YamlConfiguration
-     * @throws FileLoadException 불러올 파일이 없을 떄 발생합니다.
      */
     fun loadConfigFile(): YamlConfiguration {
-        val configFile = File(main.dataFolder,"config.yml") ?: throw FileLoadException("config.yml 파일이 존재하지 않습니다.")
-        return YamlConfiguration.loadConfiguration(configFile)
+        val file = File(main.dataFolder,"config.yml")
+        return YamlConfiguration.loadConfiguration(file)
     }
 
     /**
      * 플레이어의 UUID 파일을 불러옵니다.
      * @param uuid UUID
-     * @return YamlConfiguration
-     * @throws FileLoadException 불러올 파일이 없을 떄 발생합니다'
      */
-    fun loadVillagerFile(uuid: UUID): YamlConfiguration {
-        val uuidPath = "uuids/$uuid.yml"
-        val uuidFile = File(main.dataFolder, uuidPath) ?: throw FileLoadException("$uuid.yml 파일이 존재하지 않습니다.")
-        return YamlConfiguration.loadConfiguration(uuidFile)
+    fun loadVillagerFile(uuid: UUID) {
+        val file = File(villagerFolder, "$uuid.yml")
+        if (!file.exists()) return
+        val config = YamlConfiguration.loadConfiguration(file)
+        val villager = VillagerManager.getVillager(uuid)
     }
 
     /**
      * Villge 파일을 불러옵니다.
      * @param name String
-     * @return YamlConfiguration
-     * @throws FileLoadException 불러올 파일이 없을 떄 발생합니다.
      */
-    fun loadVillageFile(name: String): YamlConfiguration {
-        val villagePath = "villages/$name.yml"
-        val villageFile = File(main.dataFolder, villagePath) ?: throw FileLoadException("$name.yml 파일이 존재하지 않습니다.")
-        return YamlConfiguration.loadConfiguration(villageFile)
+    fun loadVillageFile(name: String) {
+        val file = File(villageFolder,"$name.yml")
+        if (!file.exists()) return
+        val config = YamlConfiguration.loadConfiguration(file)
+        val village = VillageManager.getVillage(name) ?: return
+
+        val villagers = config.getStringList("villagers").map { UUID.fromString(it) }
+        val areas = config.getStringList("areas").map { it.toLong() }
+
+        village.setVillagers(villagers)
+        village.setAreas(areas)
+        village.setMaxExpansion(config.getInt("maxExpansion"))
+        village.setMaxExpansion(config.getInt("maxPlayer"))
+        village.setChest (config.getList("chest")?.map { it as ItemStack })
     }
 
     /**
      * Config 변수를 Config 파일에 저장합니다.
-     * @throws FileLoadException 불러올 파일이 없을 떄 발생합니다.
      */
     fun saveConfigFile() {
-        val configFile = File(main.dataFolder, "config.yml") ?: throw FileLoadException("config.yml 파일이 존재하지 않습니다.")
+        val configFile = File(main.dataFolder, "config.yml")
         val config = YamlConfiguration.loadConfiguration(configFile)
         config.save(configFile)
     }
 
     /**
      * 플레이어의 정보를 UUID 파일에 저장합니다.
-     * @param uuid UUID
-     * @throws FileLoadException 불러올 파일이 없을 떄 발생합니다.
+     * @param villager Villager
      */
-    fun saveVillagerFile(uuid: UUID, yamlConfig: YamlConfiguration) {
-        val uuidPath = "uuids/$uuid.yml"
-        val uuidFile = File(main.dataFolder, uuidPath) ?: throw FileLoadException("$uuid.yml 파일이 존재하지 않습니다.")
-        yamlConfig.save(uuidFile)
+    fun saveVillagerFile(villager: Villager) {
+        val file = File(villagerFolder, "${villager.uuid}.yml")
+        val config = YamlConfiguration.loadConfiguration(file)
+        config.set("uuid", villager.uuid.toString())
+        config.set("village", villager.villageName)
+        config.set("role", villager.villagerRole.toString())
+        config.save(file)
     }
 
     /**
      * 마을의 정보를 village 파일에 저장합니다.
-     * @param name String
-     * @throws FileLoadException 불러올 파일이 없을 떄 발생합니다.
+     * @param village Village
      */
-    fun saveVillageFile(name: String, yamlConfig: YamlConfiguration) {
-        val villagePath = "villages/$name.yml"
-        val villageFile = File(main.dataFolder, villagePath) ?: throw FileLoadException("$name.yml 파일이 존재하지 않습니다.")
-        yamlConfig.save(villageFile)
+    fun saveVillageFile(village: Village) {
+        val file = File(villageFolder,"${village.name}.yml")
+        val config = YamlConfiguration.loadConfiguration(file)
+        config.set("name",village.name)
+        config.set("villagers", village.getAllVillagers().map { it.toString() })
+        config.set("areas", village.getAllAreas().map { it.toString() })
+        config.set("maxExpansion", village.maxExpansion)
+        config.set("maxPlayer", village.maxPlayer)
+        config.set("chest",village.chest.contents)
+        config.save(file)
     }
-
 }

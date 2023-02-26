@@ -52,12 +52,7 @@ object VillageManager {
     fun createVillage(player: Player, name: String) {
         if(containsVillage(name)) throw VillageCreateException("\"$name\" 마을은 이미 존재합니다.")
         if(VillagerManager.containsVillager(player.uniqueId)) throw VillageCreateException("이미 마을을 보유중입니다.")
-        VillagerManager.createVillager(player, name, VillagerRole.OWNER)
-        val village = Village(name)
-        println(village.name)
-        FileManager.createVillageFile(name)
-        village.save()
-        villageMap[name] = village
+        villageMap[name] = Village(name,player)
     }
 
     /**
