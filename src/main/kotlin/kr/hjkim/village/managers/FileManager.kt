@@ -4,6 +4,7 @@ import kr.hjkim.village.main
 import kr.hjkim.village.objects.Village
 import kr.hjkim.village.objects.Villager
 import org.bukkit.configuration.file.YamlConfiguration
+import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 import java.io.File
 import java.util.UUID
@@ -20,7 +21,42 @@ object FileManager {
         if (!file.exists()) main.saveDefaultConfig()
     }
 
-    fun getAllVillage(): HashSet<String>? {
+    fun loadVillager(player: Player) {
+        val file = File()
+    }
+
+    class VillageBuilder() {
+
+        fun build(): Village {
+
+        }
+
+    }
+
+    class VillagerBuilder() {
+
+        fun build(): Villager {
+
+        }
+
+    }
+
+    /*fun getAllVillager(): HashSet<Villager>? {
+        val villagers = HashSet<Villager>()
+        val villagersFile = villagerFolder.listFiles { file -> file.extension == "yml" } ?: return null
+        for (file in villagersFile) {
+            val config = YamlConfiguration.loadConfiguration(file)
+            val uuid = UUID.fromString(config.getString("uuid")) ?: continue
+            val villageName = config.getString("village") ?: continue
+            val role = config.getString("role") ?: continue
+            if (role == "OWNER") { villagers.add(VillagerManager.createVillager(uuid,villageName,VillagerRole.OWNER) ?: continue) }
+            else if (role == "MEMBER") { villagers.add(VillagerManager.createVillager(uuid,villageName,VillagerRole.MEMBER) ?: continue) }
+            else continue
+        }
+        return villagers
+    }*/
+
+    fun getAllVillages(): HashSet<String>? {
         val villages = HashSet<String>()
         val villageFiles = villageFolder.listFiles { file -> file.extension == "yml" } ?: return null
         for (file in villageFiles)  {
@@ -48,7 +84,8 @@ object FileManager {
         val file = File(villagerFolder, "$uuid.yml")
         if (!file.exists()) return
         val config = YamlConfiguration.loadConfiguration(file)
-        val villager = VillagerManager.getVillager(uuid)
+        val villager = VillagerManager.getVillager(uuid) ?: return
+        val player = villager.player ?: return
     }
 
     /**
@@ -56,6 +93,7 @@ object FileManager {
      * @param name String
      */
     fun loadVillageFile(name: String) {
+
         val file = File(villageFolder,"$name.yml")
         if (!file.exists()) return
         val config = YamlConfiguration.loadConfiguration(file)

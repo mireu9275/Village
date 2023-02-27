@@ -32,10 +32,10 @@ object VillagerManager {
      * @param uuid UUID
      * @return Villager?
      */
-    fun getOfflineVillager(uuid: UUID): Villager {
+   fun getOfflineVillager(uuid: UUID): Villager {
         val config = FileManager.loadVillagerFile(uuid)
-        return Villager(null,uuid,config.getString("")!!,VillagerRole.MEMBER)
-    }
+        return Villager(null, uuid, "", VillagerRole.MEMBER)
+   }
 
     /**
      * 유저를 생성합니다.
@@ -59,10 +59,14 @@ object VillagerManager {
      * @param name String
      * @param role VillagerRole
      */
-    fun createVillager(uuid: UUID, name: String, role: VillagerRole) {
-        if(getVillager(uuid) != null) return
+    fun createVillager(uuid: UUID, name: String, role: VillagerRole): Villager? {
+        if(getVillager(uuid) != null) return null
         val villager = Villager(null, uuid, name, role)
+        val village = VillageManager.getVillage(name) ?: return null
+        village.addVillager(uuid)
         villager.save()
+        villagerMap[uuid] = villager
+        return villager
     }
 
     /**

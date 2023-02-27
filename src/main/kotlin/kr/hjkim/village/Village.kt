@@ -5,7 +5,6 @@ import kr.hjkim.library.managers.DataBaseManager
 import kr.hjkim.village.commands.VillageCommands
 import kr.hjkim.village.listeners.VillageListener
 import kr.hjkim.village.managers.FileManager
-import java.io.IOException
 
 class Village: KimPlugin() {
 
@@ -17,6 +16,7 @@ class Village: KimPlugin() {
         try {
             FileManager.loadConfigFile()
             loadVillages()
+            FileManager.getAllVillager()
         }
         catch (e: Exception) {
             println("파일 불러오기 오류 ( ${e.message} )")
@@ -35,7 +35,7 @@ class Village: KimPlugin() {
     }
 
     private fun loadVillages() {
-        val villages = FileManager.getAllVillage() ?: return
+        val villages = FileManager.getAllVillages() ?: return
         for (name in villages) {
             FileManager.loadVillageFile(name)
         }

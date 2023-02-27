@@ -1,6 +1,7 @@
 package kr.hjkim.village.listeners
 
 import kr.hjkim.village.managers.AreaManager
+import kr.hjkim.village.managers.FileManager
 import kr.hjkim.village.managers.VillageBlockManager
 import kr.hjkim.village.managers.VillagerManager
 import org.bukkit.event.EventHandler
@@ -60,6 +61,9 @@ class VillageListener: Listener {
     fun onPlayerJoin(event: PlayerJoinEvent) {
         val player = event.player
         val uuid = player.uniqueId
+        FileManager.loadVillagerFile(uuid)
+        val villager = VillagerManager.getOfflineVillager(uuid)
+
     }
 
     /**

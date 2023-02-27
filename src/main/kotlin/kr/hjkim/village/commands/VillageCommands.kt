@@ -2,9 +2,11 @@ package kr.hjkim.village.commands
 
 import kr.hjkim.village.exceptions.VillageCreateException
 import kr.hjkim.village.main
+import kr.hjkim.village.managers.RequestManager
 import kr.hjkim.village.managers.VillageBlockManager
 import kr.hjkim.village.managers.VillageManager
 import kr.hjkim.village.managers.VillagerManager
+import kr.hjkim.village.objects.VillageInviteRequest
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
@@ -23,6 +25,7 @@ class VillageCommands: CommandExecutor {
                 village.addVillager(main.server.getPlayer("_MonkeyMagic_") ?: return true)
                 sender.sendMessage("추가되었습니다.")
             }
+            "수락" -> inviteAccept(sender)
             "test" -> {
                 sender as Player
                 sender.inventory.addItem(VillageBlockManager.getVillageBlock())
@@ -79,10 +82,28 @@ class VillageCommands: CommandExecutor {
     private fun inviteVillager(sender: CommandSender, args: Array<out String>) {
         if(sender !is Player) { sender.sendMessage("플레이어만 입력 가능한 명령어입니다."); return }
         if(args.size != 2) { sender.sendMessage("/마을 초대 [닉네임] : 마을에 초대합니다."); return }
-        val villager = VillagerManager.getVillager(sender.uniqueId) ?: return
+        val villager = VillagerManager.getVillager(sender.uniqueId)
+        if(villager == null) {
+            sender.sendMessage("당신은 마을이 없습니다.")
+            return
+        }
         val village = villager.getVillage()
-        val invitePlayer = main.server.getPlayer(args[1]) ?: return
-        village.addVillager(invitePlayer)
-        sender.sendMessage("${invitePlayer.name} 님을 초대하였습니다.")
+        val targetNick = args[1]
+        val target = main.server.getPlayer(targetNick)
+        if(target == null) {
+            sender.sendMessage("$targetNick 님을 찾을 수 없습니다.")
+            return
+        }
+        VillageInviteRequest(sender,target,village).request()
+    }
+
+    private fun inviteAccept(sender: CommandSender) {
+        if(sender !is Player) { sender.sendMessage("플레이어만 입력 가능한 명령어입니다."); return }
+        val request = RequestManager.getRequest(sender.uniqueId)
+        if(request == null) {
+            sender.sendMessage("받은 초대 요청이 없습니다.")
+            return
+        }
+        request.accept()
     }
 }
