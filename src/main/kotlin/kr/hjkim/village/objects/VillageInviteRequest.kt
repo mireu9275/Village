@@ -22,7 +22,7 @@ class VillageInviteRequest(
 
     fun request() {
         if(VillagerManager.containsVillager(receiverUUID)) {
-            sender.sendMessage("${getReceiverName()} 님은 이미 마을이 있습니다.")
+            sender.sendMessage("$receiverName 님은 이미 마을이 있습니다.")
             return
         }
         val request = RequestManager.getRequest(senderUUID)
@@ -36,27 +36,27 @@ class VillageInviteRequest(
         }
         RequestManager.setRequest(sender.uniqueId,this)
         RequestManager.setRequest(receiver.uniqueId,this)
-        sender.sendMessage("${getReceiverName()} 님께 초대 요청을 보냈습니다.")
-        receiver.sendMessage("${senderName()} 님으로 부터 마을 초대 요청이 왔습니다.")
+        sender.sendMessage("$receiverName 님께 초대 요청을 보냈습니다.")
+        receiver.sendMessage("$senderName 님으로 부터 마을 초대 요청이 왔습니다.")
         queue()
     }
 
     fun accept() {
         if(VillagerManager.containsVillager(receiverUUID)) {
-            sender.sendMessage("${getReceiverName()} 님은 이미 마을이 있습니다.")
+            sender.sendMessage("$receiverName 님은 이미 마을이 있습니다.")
             return
         }
-        sender.sendMessage("${getReceiverName()} 님께 보낸 요청이 수락되었습니다.")
-        receiver.sendMessage("${senderName()} 님의 요청을 수락했습니다.")
-        RequestManager.removeRequest(sender.uniqueId)
-        RequestManager.removeRequest(receiver.uniqueId)
+        sender.sendMessage("$receiverName 님께 보낸 요청이 수락되었습니다.")
+        receiver.sendMessage("$senderName 님의 요청을 수락했습니다.")
+        RequestManager.removeRequest(senderUUID)
+        RequestManager.removeRequest(receiverUUID)
         isExpired = true
         village.addVillager(receiver)
     }
 
     fun denied() {
-        sender.sendMessage("${getReceiverName()} 님께 보낸 요청이 거절되었습니다.")
-        receiver.sendMessage("${senderName()} 님의 요청을 거절했습니다.")
+        sender.sendMessage("$receiverName 님께 보낸 요청이 거절되었습니다.")
+        receiver.sendMessage("$senderName 님의 요청을 거절했습니다.")
         RequestManager.removeRequest(senderUUID)
         RequestManager.removeRequest(receiverUUID)
         isExpired = true

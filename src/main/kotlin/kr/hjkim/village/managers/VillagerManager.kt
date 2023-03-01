@@ -33,7 +33,7 @@ object VillagerManager {
      * @return Villager?
      */
    fun getOfflineVillager(uuid: UUID): Villager {
-        val config = FileManager.loadVillagerFile(uuid)
+        val config = FileManager.loadOfflineVillagerFile(uuid)
         return Villager(null, uuid, "", VillagerRole.MEMBER)
    }
 

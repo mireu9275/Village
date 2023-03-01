@@ -18,13 +18,7 @@ class VillageCommands: CommandExecutor {
         if(args.isEmpty()) { usage(sender); return true }
         when(args[0]) {
             "생성","create" -> createVillage(sender,args)
-            "초대" -> {
-                sender as Player
-                val villager = VillagerManager.getVillager(sender.uniqueId) ?: return true
-                val village = villager.getVillage()
-                village.addVillager(main.server.getPlayer("_MonkeyMagic_") ?: return true)
-                sender.sendMessage("추가되었습니다.")
-            }
+            "초대" -> inviteVillager(sender,args)
             "수락" -> inviteAccept(sender)
             "test" -> {
                 sender as Player
@@ -89,7 +83,7 @@ class VillageCommands: CommandExecutor {
         }
         val village = villager.getVillage()
         val targetNick = args[1]
-        val target = main.server.getPlayer(targetNick)
+        val target = main.server.getPlayerExact(targetNick)
         if(target == null) {
             sender.sendMessage("$targetNick 님을 찾을 수 없습니다.")
             return

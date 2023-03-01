@@ -1,6 +1,0 @@
-sword:
-  material: DIAMOND_SWORD
-  name: 'test'
-  lore:
-    - 'a'
-    - 'b'

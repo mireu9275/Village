@@ -29,6 +29,12 @@ object VillageManager {
      */
     fun getVillage(name: String) = villageMap[name]
 
+    fun saveAllVillages() {
+        for (village in villageMap.values) {
+            village.save()
+        }
+    }
+
     /**
      * 새로운 마을을 생성합니다. (OP전용)
      * @param uuid UUID
@@ -55,6 +61,13 @@ object VillageManager {
         villageMap[name] = Village(name,player)
     }
 
+    fun createVillage(name: String) {
+        if(containsVillage(name)) { println("\"$name\" 마을은 이미 존재합니다."); return }
+        val village = Village(name)
+        villageMap[name] = village
+        FileManager.loadVillageFile(village)
+    }
+
     /**
      * 마을을 삭제합니다.
      * @param name String
@@ -63,4 +76,5 @@ object VillageManager {
         if(!villageMap.containsKey(name)) return
         villageMap.remove(name)
     }
+
 }

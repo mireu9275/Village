@@ -61,9 +61,7 @@ class VillageListener: Listener {
     fun onPlayerJoin(event: PlayerJoinEvent) {
         val player = event.player
         val uuid = player.uniqueId
-        FileManager.loadVillagerFile(uuid)
-        val villager = VillagerManager.getOfflineVillager(uuid)
-
+        FileManager.loadVillagerFile(player)
     }
 
     /**

@@ -5,14 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="48c17b18-3ea8-4f32-bc85-5fbc7bbd1843" name="변경" comment="&#10;update">
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/managers/RequestManager.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/objects/VillageInviteRequest.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/exceptions/SerializeException.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/Village.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/Village.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/commands/VillageCommands.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/commands/VillageCommands.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/listeners/VillageListener.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/listeners/VillageListener.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/managers/FileManager.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/managers/FileManager.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/managers/VillageManager.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/managers/VillageManager.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/managers/VillagerManager.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/managers/VillagerManager.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/objects/Village.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/objects/Village.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/objects/VillageInviteRequest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/kr/hjkim/village/objects/VillageInviteRequest.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -113,7 +115,7 @@
       <recent name="kr.hjkim.village.objects" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.Village [buildDependents]">
+  <component name="RunManager" selected="Gradle.Village [build]">
     <configuration name="Village [buildDependents]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -179,9 +181,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.Village [build]" />
         <item itemvalue="Gradle.Village [buildDependents]" />
         <item itemvalue="Gradle.Village [clean]" />
-        <item itemvalue="Gradle.Village [build]" />
       </list>
     </recent_temporary>
   </component>
@@ -369,7 +371,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677419026134</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="&#10;update">
+      <created>1677503244502</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1677503244502</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

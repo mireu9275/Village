@@ -63,6 +63,7 @@ class Village(val name: String, val chest: Inventory = main.server.createInvento
     fun addVillager(player: Player) {
         val uuid = player.uniqueId
         val villager = Villager(player, uuid, name, VillagerRole.MEMBER)
+        villager.save()
         VillagerManager.registerVillager(uuid, villager)
         villagers.add(uuid)
     }
@@ -93,19 +94,24 @@ class Village(val name: String, val chest: Inventory = main.server.createInvento
 
     fun setAreas(areas: List<Long>) {
         this.areas.clear()
-        this.areas.addAll(areas)
+        for (area in areas) {
+            AreaManager.registerArea(area,name)
+            this.areas.add(area)
+        }
     }
 
-    fun setChest(chest: List<ItemStack>?) {
+    fun setChest(chest: List<ItemStack>) {
         this.chest.clear()
-        chest?.forEachIndexed { index, item ->
+        chest.forEachIndexed { index, item ->
             this.chest.setItem(index, item)
         }
     }
 
     fun setMaxExpansion(size: Int) { maxExpansion = size }
+    fun setMaxPlayer(size: Int) { maxPlayer = size}
 
-    fun load() { FileManager.loadVillageFile(name) }
+
+    fun load() { FileManager.loadVillageFile(this) }
 
     /**
      * 마을의 정보를 Village 폴더 내에 파일로 저장합니다.
