@@ -35,7 +35,6 @@ object FileManager {
         if (!file.exists()) main.saveDefaultConfig()
     }
 
-    private fun loadVillage(villageName: String)
 
     class VillageBuilder(val villageName: String) {
 
@@ -61,8 +60,8 @@ object FileManager {
             }
         }
 
-        private fun buildVillagers(): List<UUID> {
-            val villagers = ArrayList<UUID>()
+        private fun buildVillagers(): HashSet<UUID> {
+            val villagers = HashSet<UUID>()
             for(uuidString in config.getStringList("villagers")) {
                 try {
                     villagers.add(UUID.fromString(uuidString))
@@ -73,8 +72,8 @@ object FileManager {
             return villagers
         }
 
-        private fun buildAreas(): List<Long> {
-            val areas = ArrayList<Long>()
+        private fun buildAreas(): HashSet<Long> {
+            val areas = HashSet<Long>()
             for(areaString in config.getStringList("areas")) {
                 try {
                     areas.add(areaString.toLong())

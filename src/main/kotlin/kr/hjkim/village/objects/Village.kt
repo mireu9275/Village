@@ -12,14 +12,31 @@ import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashSet
 
-class Village(val name: String, val chest: Inventory = main.server.createInventory(null,54)) {
+class Village(
+    val name: String,
+    val villagers: HashSet<UUID>,
+    val areas: HashSet<Long>,
+    val chest: Inventory = main.server.createInventory(null,54)
+) {
 
-    constructor(name: String, owner: UUID, inventory: Inventory = main.server.createInventory(null,54)): this(name, inventory) {
+    constructor(
+        name: String,
+        owner: UUID,
+        villagers: HashSet<UUID>,
+        areas: HashSet<Long>,
+        inventory: Inventory = main.server.createInventory(null,54)
+    ): this(name, villagers, areas, inventory) {
         Villager(null, owner, name,VillagerRole.OWNER).save()
         save()
     }
 
-    constructor(name: String, owner: Player, inventory: Inventory = main.server.createInventory(null,54)): this(name, inventory) {
+    constructor(
+        name: String,
+        owner: Player,
+        villagers: HashSet<UUID>,
+        areas: HashSet<Long>,
+        inventory: Inventory = main.server.createInventory(null,54)
+    ): this(name, villagers, areas, inventory) {
         val uuid = owner.uniqueId
         val villager = Villager(owner, uuid, name, VillagerRole.OWNER)
         VillagerManager.registerVillager(uuid, villager)
@@ -27,9 +44,6 @@ class Village(val name: String, val chest: Inventory = main.server.createInvento
         villager.save()
         save()
     }
-
-    private val villagers = HashSet<UUID>()
-    private val areas = HashSet<Long>()
     var maxExpansion: Int = 1
         private set
     var maxPlayer: Int = 10
