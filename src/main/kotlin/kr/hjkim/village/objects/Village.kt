@@ -14,17 +14,19 @@ import kotlin.collections.HashSet
 
 class Village(
     val name: String,
-    val villagers: HashSet<UUID>,
-    val areas: HashSet<Long>,
-    val chest: Inventory = main.server.createInventory(null,54)
+    val villagers: HashSet<UUID> = HashSet<UUID>(),
+    val areas: HashSet<Long> = HashSet<Long>(),
+    val chest: Inventory = main.server.createInventory(null,54),
 ) {
 
     constructor(
         name: String,
         owner: UUID,
-        villagers: HashSet<UUID>,
-        areas: HashSet<Long>,
-        inventory: Inventory = main.server.createInventory(null,54)
+        villagers: HashSet<UUID> = HashSet<UUID>(),
+        areas: HashSet<Long> = HashSet<Long>(),
+        inventory: Inventory = main.server.createInventory(null,54),
+        maxExpansion: Int,
+        maxPlayer: Int
     ): this(name, villagers, areas, inventory) {
         Villager(null, owner, name,VillagerRole.OWNER).save()
         save()
@@ -33,9 +35,11 @@ class Village(
     constructor(
         name: String,
         owner: Player,
-        villagers: HashSet<UUID>,
-        areas: HashSet<Long>,
-        inventory: Inventory = main.server.createInventory(null,54)
+        villagers: HashSet<UUID> = HashSet<UUID>(),
+        areas: HashSet<Long> = HashSet<Long>(),
+        inventory: Inventory = main.server.createInventory(null,54),
+        maxExpansion: Int,
+        maxPlayer: Int
     ): this(name, villagers, areas, inventory) {
         val uuid = owner.uniqueId
         val villager = Villager(owner, uuid, name, VillagerRole.OWNER)

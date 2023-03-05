@@ -2,10 +2,7 @@ package kr.hjkim.village.managers
 
 import kr.hjkim.village.enums.VillagerRole
 import kr.hjkim.village.exceptions.VillageCreateException
-import kr.hjkim.village.main
 import kr.hjkim.village.objects.Village
-import kr.hjkim.village.objects.Villager
-import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.entity.Player
 import java.io.File
 import java.util.UUID
@@ -58,7 +55,7 @@ object VillageManager {
     fun createVillage(player: Player, name: String) {
         if(containsVillage(name)) throw VillageCreateException("\"$name\" 마을은 이미 존재합니다.")
         if(VillagerManager.containsVillager(player.uniqueId)) throw VillageCreateException("이미 마을을 보유중입니다.")
-        villageMap[name] = Village(name,player)
+        villageMap[name] = Village(name)
     }
 
     fun createVillage(name: String) {

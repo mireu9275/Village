@@ -42,7 +42,7 @@ object FileManager {
         private lateinit var config: YamlConfiguration
 
         fun build(): Village? = try {
-            Village(villageName,buildVillagers(),buildAreas(),buildChest(),buildMaxExpansion(),buildMaxPlayer())
+            Village(villageName,buildOwner(),buildVillagers(),buildAreas(),buildChest(),buildMaxExpansion(),buildMaxPlayer())
         } catch (e: VillageCreateException) {
             main.logger.warning(e.message!!)
             null
@@ -58,6 +58,10 @@ object FileManager {
             } catch (e: Exception) {
                 throw VillageCreateException("$villageName 마을 데이터 파일을 가져오는데 실패하였습니다.")
             }
+        }
+
+        private  fun buildOwner(): UUID {
+            return UUID.fromString(config.getString("owner"))
         }
 
         private fun buildVillagers(): HashSet<UUID> {
@@ -204,7 +208,7 @@ object FileManager {
         config.save(file)
     }
 
-    private fun Inventory.toBase64(title): String {
+    private fun Inventory.toBase64(): String {
         return try {
             ByteArrayOutputStream().use { byteStream ->
                 BukkitObjectOutputStream(byteStream).use { bukkitStream ->
